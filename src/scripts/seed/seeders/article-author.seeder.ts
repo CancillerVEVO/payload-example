@@ -15,7 +15,7 @@ export async function seedArticleAuthor(payload: Payload) {
       return;
     }
 
-    await payload.create({
+    const author = await payload.create({
       collection: 'article-authors',
       data: {
         name: faker.person.fullName(),
@@ -23,7 +23,8 @@ export async function seedArticleAuthor(payload: Payload) {
         avatar: image.id,
       },
     });
+    console.log('Seeded article author', { id: author.id, name: author.name });
   } catch (e) {
-    console.warn('Failed to seed article author', { error: e });
+    console.error('Failed to seed article author', { error: e });
   }
 }
