@@ -5,6 +5,7 @@ import config from '@/payload.config';
 import { ARTICLE_STATUSES, MAX_SUMMARY_LENGTH } from '@/collections/Articles/constants';
 import { createMediaFromImageUrl } from '../lib/create-media-from-image-url';
 import { slugify } from 'payload/shared';
+import slugifyUrl from '@/lib/slugify';
 
 const ARTICLES_COUNT = 5;
 
@@ -25,7 +26,7 @@ export async function seedArticles(payload: Payload) {
       const status = faker.helpers.arrayElement(Object.values(ARTICLE_STATUSES));
 
       const title = faker.lorem.sentence();
-      const slug = slugify(title);
+      const slug = slugifyUrl(title);
       const content = faker.lorem.paragraphs(5);
       const contentLexical = convertMarkdownToLexical({
         markdown: content,
